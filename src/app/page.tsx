@@ -121,7 +121,7 @@ export default function NewHomePage() {
           {t('contactDesc')}
         </p>
         <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground px-10 py-3 text-lg">
-            <Link href="/login"> {/* Or a future /contact page */}
+            <Link href="/contact"> 
               {t('contactCTA')} <Star className="ml-2 h-5 w-5" />
             </Link>
         </Button>

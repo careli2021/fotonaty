@@ -21,13 +21,18 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     english: "English",
     spanish: "Español",
 
-    // Header
+    // Header & Navigation
+    home: "Home",
+    portfolio: "Portfolio",
+    aboutMe: "About Me",
+    contactMe: "Contact Me",
+    partyEvent: "Party Event",
     sampleEvent: "Sample Event",
     login: "Login",
     
     // Old Home Page (now /features)
-    welcomeToEventSnap: "Welcome to EventSnap!", // Kept for potential reuse, but new page has its own
-    homePageSubtitle: "Capture, share, and relive your special event moments in real-time. Easy for guests, delightful for hosts.", // Kept for reuse
+    welcomeToEventSnap: "Welcome to EventSnap!", 
+    homePageSubtitle: "Capture, share, and relive your special event moments in real-time. Easy for guests, delightful for hosts.", 
     exploreSampleEvent: "Explore a Sample Event",
     guestLogin: "Guest Login",
     easyPhotoSharing: "Easy Photo Sharing",
@@ -52,11 +57,11 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
 
     // New Home Page (src/app/page.tsx)
     heroTitle: "Your Event, Beautifully Captured",
-    heroSubtitle: "Professional event photography and real-time sharing. Create lasting memories with EventSnap.",
+    heroSubtitle: "Professional event photography and real-time sharing. Create lasting memories with Nathaly Ponte Fotografa.",
     heroCTA: "Explore Our Work",
     heroAlt: "Hero image showcasing a vibrant event",
     servicesTitle: "Our Services",
-    servicesDesc: "Discover how EventSnap can elevate your next event with seamless photo sharing and interactive experiences.",
+    servicesDesc: "Discover how Nathaly Ponte Fotografa can elevate your next event with seamless photo sharing and interactive experiences.",
     serviceCard1Title: "Stunning Event Photography",
     serviceCard1Desc: "Capturing every detail and emotion with professional quality and artistic vision.",
     serviceCard2Title: "Real-Time Photo Sharing",
@@ -75,9 +80,9 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     contactCTA: "Get Started",
 
     // Features Page (src/app/features/page.tsx)
-    featuresPageTitle: "EventSnap Features",
-    featuresPageSubtitle: "Explore how EventSnap makes photo sharing at your events simple and engaging.",
-    featurePageMainImageAlt: "Banner showcasing EventSnap features",
+    featuresPageTitle: "Nathaly Ponte Fotografa Features",
+    featuresPageSubtitle: "Explore how Nathaly Ponte Fotografa makes photo sharing at your events simple and engaging.",
+    featurePageMainImageAlt: "Banner showcasing Nathaly Ponte Fotografa features",
 
   },
   es: {
@@ -86,7 +91,12 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     english: "Inglés",
     spanish: "Español",
 
-    // Header
+    // Header & Navigation
+    home: "Inicio",
+    portfolio: "Portafolio",
+    aboutMe: "Sobre Mí",
+    contactMe: "Contáctame",
+    partyEvent: "Evento Fiesta",
     sampleEvent: "Evento de Muestra",
     login: "Iniciar Sesión",
 
@@ -117,11 +127,11 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
 
     // New Home Page (src/app/page.tsx)
     heroTitle: "Tu Evento, Capturado Hermosamente",
-    heroSubtitle: "Fotografía profesional de eventos y uso compartido en tiempo real. Crea recuerdos duraderos con EventSnap.",
+    heroSubtitle: "Fotografía profesional de eventos y uso compartido en tiempo real. Crea recuerdos duraderos con Nathaly Ponte Fotografa.",
     heroCTA: "Explora Nuestro Trabajo",
     heroAlt: "Imagen principal mostrando un evento vibrante",
     servicesTitle: "Nuestros Servicios",
-    servicesDesc: "Descubre cómo EventSnap puede realzar tu próximo evento con un intercambio de fotos fluido y experiencias interactivas.",
+    servicesDesc: "Descubre cómo Nathaly Ponte Fotografa puede realzar tu próximo evento con un intercambio de fotos fluido y experiencias interactivas.",
     serviceCard1Title: "Fotografía de Eventos Impresionante",
     serviceCard1Desc: "Capturando cada detalle y emoción con calidad profesional y visión artística.",
     serviceCard2Title: "Uso Compartido de Fotos en Tiempo Real",
@@ -136,13 +146,13 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     galleryImageAlt3: "Foto de evento de muestra 3",
     galleryCTA: "Ver Galería de Muestra",
     contactTitle: "Creemos Algo Increíble",
-    contactDesc: "¿Listo para capturar tu próximo evento? ¡Contáctanos hoy mismo!",
+    contactDesc: "¿Lista para capturar tu próximo evento? ¡Contáctanos hoy mismo!",
     contactCTA: "Comenzar",
 
     // Features Page (src/app/features/page.tsx)
-    featuresPageTitle: "Características de EventSnap",
-    featuresPageSubtitle: "Explora cómo EventSnap hace que compartir fotos en tus eventos sea simple y atractivo.",
-    featurePageMainImageAlt: "Banner mostrando las características de EventSnap",
+    featuresPageTitle: "Características de Nathaly Ponte Fotografa",
+    featuresPageSubtitle: "Explora cómo Nathaly Ponte Fotografa hace que compartir fotos en tus eventos sea simple y atractivo.",
+    featurePageMainImageAlt: "Banner mostrando las características de Nathaly Ponte Fotografa",
   },
 };
 

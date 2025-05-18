@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'EventSnap - Share Your Moments',
-  description: 'Capture and visualize photos in real time at your social events.',
+  title: 'Nathaly Ponte Fotografa - Comparte Tus Momentos',
+  description: 'Captura y visualiza fotos en tiempo real en tus eventos sociales.',
 };
 
 export default function RootLayout({
