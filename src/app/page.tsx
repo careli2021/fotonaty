@@ -16,7 +16,7 @@ export default function NewHomePage() {
       {/* Hero Section */}
       <section className="w-full h-[70vh] md:h-[80vh] relative flex items-center justify-center text-center overflow-hidden">
         <Image
-          src="https://placehold.co/1920x1080.png"
+          src="https://drive.google.com/uc?export=download&id=1msToi39sUVjgCQJ3HKwxRxMSS3woUM4w"
           alt={t('heroAlt')}
           layout="fill"
           objectFit="cover"
@@ -97,13 +97,13 @@ export default function NewHomePage() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="aspect-square relative rounded-lg overflow-hidden shadow-md group">
-                 <Image src="https://placehold.co/600x600.png" alt={t('galleryImageAlt1')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="event photography sample"/>
+                 <Image src="https://drive.google.com/uc?export=download&id=1wy37pD1-z7Z4NTISlbA13O46fSABKbj6" alt={t('galleryImageAlt1')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="event photography sample"/>
               </div>
                <div className="aspect-square relative rounded-lg overflow-hidden shadow-md group">
-                 <Image src="https://placehold.co/600x600.png" alt={t('galleryImageAlt2')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="party social gathering"/>
+                 <Image src="https://drive.google.com/uc?export=download&id=15STDzZX0QoMCh3kMwVi48y3vL-ZRyq65" alt={t('galleryImageAlt2')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="party social gathering"/>
               </div>
                <div className="aspect-square relative rounded-lg overflow-hidden shadow-md group">
-                 <Image src="https://placehold.co/600x600.png" alt={t('galleryImageAlt3')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="wedding celebration moments"/>
+                 <Image src="https://drive.google.com/uc?export=download&id=1idHpOxzrEEpn8mpLsvmsKlJ-T1AxpVwR" alt={t('galleryImageAlt3')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="wedding celebration moments"/>
               </div>
             </div>
             <Button size="lg" asChild className="mt-12 bg-primary hover:bg-primary/80 text-primary-foreground">
