@@ -9,40 +9,40 @@ body {
 @layer base {
   :root {
     --background: 0 0% 100%; /* White */
-    --foreground: 0 0% 3.9%; /* Default Black for text */
+    --foreground: 222.2 84% 4.9%; /* Dark blue/black for text */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 276 87% 53%; /* Purple */
-    --primary-foreground: 0 0% 98%; /* White-ish, good contrast for purple */
-    --secondary: 276 30% 95%; /* Lighter, less saturated purple for secondary elements */
-    --secondary-foreground: 276 87% 30%; /* Darker purple for text on secondary */
-    --muted: 276 30% 97%; /* Even lighter purple for muted */
-    --muted-foreground: 276 10% 45%; /* Greyer purple for muted text */
-    --accent: 180 100% 25%; /* Teal */
-    --accent-foreground: 0 0% 98%; /* White-ish, good contrast for teal */
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 210 100% 45%; /* Blue */
+    --primary-foreground: 0 0% 98%; /* White for text on primary */
+    --secondary: 210 40% 95%; /* Lighter blue for secondary elements */
+    --secondary-foreground: 210 80% 20%; /* Darker blue for text on secondary */
+    --muted: 210 40% 97%; /* Even lighter blue for muted */
+    --muted-foreground: 210 20% 40%; /* Greyer blue for muted text */
+    --accent: 210 100% 30%; /* Darker blue for accent */
+    --accent-foreground: 0 0% 98%; /* White for text on accent */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 276 30% 90%; /* Lighter purple border */
-    --input: 276 30% 92%; /* Lighter purple input bg */
-    --ring: 180 100% 30%; /* Teal for focus rings, adjusted for visibility */
+    --border: 210 40% 90%; /* Lighter blue border */
+    --input: 210 40% 92%; /* Lighter blue input bg */
+    --ring: 210 100% 55%; /* Blue for focus rings */
     --radius: 0.5rem;
     --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
+    --chart-2: 210 100% 45%; /* Blue */
+    --chart-3: 210 40% 95%; /* Light blue */
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
     /* Sidebar specific colors - kept distinct if sidebar is used elsewhere, but ensure they match app theme if sidebar is main navigation */
-    --sidebar-background: 276 20% 98%; /* Light Purple a bit darker than main background */
-    --sidebar-foreground: 276 87% 20%; /* Dark Purple for text */
-    --sidebar-primary: 276 87% 53%; /* Purple */
+    --sidebar-background: 210 20% 98%; /* Light blue a bit darker than main background */
+    --sidebar-foreground: 210 80% 20%; /* Dark blue for text */
+    --sidebar-primary: 210 100% 45%; /* Blue */
     --sidebar-primary-foreground: 0 0% 98%; /* White-ish */
-    --sidebar-accent: 180 100% 25%; /* Teal */
+    --sidebar-accent: 210 100% 30%; /* Darker blue */
     --sidebar-accent-foreground: 0 0% 98%; /* White-ish */
-    --sidebar-border: 276 30% 88%; /* Slightly darker purple border for sidebar */
-    --sidebar-ring: 180 100% 30%; /* Teal */
+    --sidebar-border: 210 40% 88%; /* Slightly darker blue border for sidebar */
+    --sidebar-ring: 210 100% 55%; /* Blue */
   }
   .dark {
     --background: 276 10% 10%; /* Dark Purple */

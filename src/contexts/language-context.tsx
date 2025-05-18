@@ -25,9 +25,9 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     sampleEvent: "Sample Event",
     login: "Login",
     
-    // Home Page
-    welcomeToEventSnap: "Welcome to EventSnap!",
-    homePageSubtitle: "Capture, share, and relive your special event moments in real-time. Easy for guests, delightful for hosts.",
+    // Old Home Page (now /features)
+    welcomeToEventSnap: "Welcome to EventSnap!", // Kept for potential reuse, but new page has its own
+    homePageSubtitle: "Capture, share, and relive your special event moments in real-time. Easy for guests, delightful for hosts.", // Kept for reuse
     exploreSampleEvent: "Explore a Sample Event",
     guestLogin: "Guest Login",
     easyPhotoSharing: "Easy Photo Sharing",
@@ -49,6 +49,36 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     phoneInvalidFormatError: "Invalid phone number format.",
     loginSubmittedToastTitle: "Login Submitted",
     loginSubmittedToastDesc: "Attempting to log in with {phoneNumber}. (This is a mock action)",
+
+    // New Home Page (src/app/page.tsx)
+    heroTitle: "Your Event, Beautifully Captured",
+    heroSubtitle: "Professional event photography and real-time sharing. Create lasting memories with EventSnap.",
+    heroCTA: "Explore Our Work",
+    heroAlt: "Hero image showcasing a vibrant event",
+    servicesTitle: "Our Services",
+    servicesDesc: "Discover how EventSnap can elevate your next event with seamless photo sharing and interactive experiences.",
+    serviceCard1Title: "Stunning Event Photography",
+    serviceCard1Desc: "Capturing every detail and emotion with professional quality and artistic vision.",
+    serviceCard2Title: "Real-Time Photo Sharing",
+    serviceCard2Desc: "Guests instantly view and share photos, creating a dynamic event experience.",
+    serviceCard3Title: "Interactive Photobooth Fun",
+    serviceCard3Desc: "Add excitement with customizable photobooths, perfect for any occasion.",
+    servicesCTA: "Discover All Features",
+    galleryTitle: "Event Galleries",
+    galleryDesc: "Relive the moments. Browse through our featured event galleries.",
+    galleryImageAlt1: "Sample event photo 1",
+    galleryImageAlt2: "Sample event photo 2",
+    galleryImageAlt3: "Sample event photo 3",
+    galleryCTA: "View Sample Gallery",
+    contactTitle: "Let's Create Something Amazing",
+    contactDesc: "Ready to capture your next event? Get in touch with us today!",
+    contactCTA: "Get Started",
+
+    // Features Page (src/app/features/page.tsx)
+    featuresPageTitle: "EventSnap Features",
+    featuresPageSubtitle: "Explore how EventSnap makes photo sharing at your events simple and engaging.",
+    featurePageMainImageAlt: "Banner showcasing EventSnap features",
+
   },
   es: {
     // General
@@ -60,7 +90,7 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     sampleEvent: "Evento de Muestra",
     login: "Iniciar Sesión",
 
-    // Home Page
+    // Old Home Page (now /features)
     welcomeToEventSnap: "¡Bienvenido a EventSnap!",
     homePageSubtitle: "Captura, comparte y revive los momentos especiales de tu evento en tiempo real. Fácil para los invitados, encantador para los anfitriones.",
     exploreSampleEvent: "Explorar Evento de Muestra",
@@ -84,13 +114,42 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     phoneInvalidFormatError: "Formato de número de teléfono inválido.",
     loginSubmittedToastTitle: "Inicio de Sesión Enviado",
     loginSubmittedToastDesc: "Intentando iniciar sesión con {phoneNumber}. (Esta es una acción simulada)",
+
+    // New Home Page (src/app/page.tsx)
+    heroTitle: "Tu Evento, Capturado Hermosamente",
+    heroSubtitle: "Fotografía profesional de eventos y uso compartido en tiempo real. Crea recuerdos duraderos con EventSnap.",
+    heroCTA: "Explora Nuestro Trabajo",
+    heroAlt: "Imagen principal mostrando un evento vibrante",
+    servicesTitle: "Nuestros Servicios",
+    servicesDesc: "Descubre cómo EventSnap puede realzar tu próximo evento con un intercambio de fotos fluido y experiencias interactivas.",
+    serviceCard1Title: "Fotografía de Eventos Impresionante",
+    serviceCard1Desc: "Capturando cada detalle y emoción con calidad profesional y visión artística.",
+    serviceCard2Title: "Uso Compartido de Fotos en Tiempo Real",
+    serviceCard2Desc: "Los invitados ven y comparten fotos al instante, creando una experiencia de evento dinámica.",
+    serviceCard3Title: "Fotomatón Interactivo y Divertido",
+    serviceCard3Desc: "Añade emoción con nuestros fotomatones personalizables, perfectos para cualquier ocasión.",
+    servicesCTA: "Descubre Todas las Funciones",
+    galleryTitle: "Galerías de Eventos",
+    galleryDesc: "Revive los momentos. Navega por nuestras galerías de eventos destacadas.",
+    galleryImageAlt1: "Foto de evento de muestra 1",
+    galleryImageAlt2: "Foto de evento de muestra 2",
+    galleryImageAlt3: "Foto de evento de muestra 3",
+    galleryCTA: "Ver Galería de Muestra",
+    contactTitle: "Creemos Algo Increíble",
+    contactDesc: "¿Listo para capturar tu próximo evento? ¡Contáctanos hoy mismo!",
+    contactCTA: "Comenzar",
+
+    // Features Page (src/app/features/page.tsx)
+    featuresPageTitle: "Características de EventSnap",
+    featuresPageSubtitle: "Explora cómo EventSnap hace que compartir fotos en tus eventos sea simple y atractivo.",
+    featurePageMainImageAlt: "Banner mostrando las características de EventSnap",
   },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<SupportedLanguage>('en'); // Default language
+  const [language, setLanguage] = useState<SupportedLanguage>('es'); // Default language
 
   useEffect(() => {
     const storedLang = localStorage.getItem('appLanguage') as SupportedLanguage | null;
