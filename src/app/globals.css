@@ -12,98 +12,98 @@ body {
 @layer base {
   :root {
     --background: 0 0% 100%; /* White - PRD */
-    --foreground: 276 10% 25%; /* Dark cool gray/purpleish for text */
+    --foreground: 222 10% 25%; /* Dark cool gray/blueish for text */
 
     --card: 0 0% 100%; /* White cards */
-    --card-foreground: 276 10% 25%; /* Dark text on cards */
+    --card-foreground: 222 10% 25%; /* Dark text on cards */
 
     --popover: 0 0% 100%; /* White popovers */
-    --popover-foreground: 276 10% 25%; /* Dark text on popovers */
+    --popover-foreground: 222 10% 25%; /* Dark text on popovers */
 
-    --primary: 276 87% 53%; /* Purple - PRD Main */
-    --primary-foreground: 0 0% 100%; /* White text on Purple */
+    --primary: 222 75% 48%; /* Blue - New Main Color */
+    --primary-foreground: 0 0% 100%; /* White text on Blue */
 
-    --secondary: 276 75% 92%; /* Lighter Purple for backgrounds */
-    --secondary-foreground: 276 87% 45%; /* Darker Purple for text on secondary */
+    --secondary: 222 70% 90%; /* Lighter Blue for backgrounds */
+    --secondary-foreground: 222 75% 40%; /* Darker Blue for text on secondary */
 
-    --muted: 276 60% 96%; /* Very Light Purple/Gray for less emphasis backgrounds */
-    --muted-foreground: 276 30% 60%; /* Grayish Purple for text on muted or muted text itself */
+    --muted: 222 65% 95%; /* Very Light Blue/Gray for less emphasis backgrounds */
+    --muted-foreground: 222 25% 55%; /* Grayish Blue for text on muted or muted text itself */
 
-    --accent: 180 100% 25%; /* Teal - PRD Accent */
-    --accent-foreground: 0 0% 100%; /* White text on Teal */
+    --accent: 180 100% 25%; /* Teal - PRD Accent (remains) */
+    --accent-foreground: 0 0% 100%; /* White text on Teal (remains) */
 
     --destructive: 0 84.2% 60.2%; /* Standard destructive red */
     --destructive-foreground: 0 0% 98%; /* Light text on destructive */
 
-    --border: 276 40% 88%; /* Subtle purple-ish border */
-    --input: 276 50% 94%; /* Subtle purple-ish input background */
-    --ring: 180 100% 35%;  /* Teal for focus rings (matches accent) */
+    --border: 222 40% 85%; /* Subtle blue-ish border */
+    --input: 222 50% 92%; /* Subtle blue-ish input background */
+    --ring: 222 75% 55%;  /* Blue for focus rings (matches new primary) */
 
     --radius: 0.5rem;
 
-    /* Updated chart colors for light theme based on PRD Purple/Teal */
-    --chart-1: 276 87% 60%; /* Lighter Purple */
-    --chart-2: 180 100% 30%; /* Slightly Lighter Teal */
-    --chart-3: 276 60% 75%; /* Mid Purple */
-    --chart-4: 180 70% 45%; /* Mid Teal */
-    --chart-5: 276 40% 85%; /* Very Light Purple */
+    /* Updated chart colors for light theme based on Blue/Teal */
+    --chart-1: 222 75% 55%; /* Lighter Blue */
+    --chart-2: 180 100% 30%; /* Slightly Lighter Teal (remains) */
+    --chart-3: 222 55% 70%; /* Mid Blue */
+    --chart-4: 180 70% 45%; /* Mid Teal (remains) */
+    --chart-5: 222 35% 80%; /* Very Light Blue */
 
-    /* Sidebar colors for light theme based on PRD */
-    --sidebar-background: 276 50% 97%; /* Very light purple for sidebar bg */
-    --sidebar-foreground: 276 10% 25%; /* Dark text for sidebar */
-    --sidebar-primary: 276 87% 53%; /* Purple */
+    /* Sidebar colors for light theme based on Blue/Teal */
+    --sidebar-background: 222 50% 96%; /* Very light blue for sidebar bg */
+    --sidebar-foreground: 222 10% 25%; /* Dark text for sidebar */
+    --sidebar-primary: 222 75% 48%; /* Blue */
     --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 180 100% 25%; /* Teal */
-    --sidebar-accent-foreground: 0 0% 100%; /* White */
-    --sidebar-border: 276 30% 90%; /* Light purple border for sidebar */
-    --sidebar-ring: 180 100% 35%; /* Teal */
+    --sidebar-accent: 180 100% 25%; /* Teal (remains) */
+    --sidebar-accent-foreground: 0 0% 100%; /* White (remains) */
+    --sidebar-border: 222 30% 88%; /* Light blue border for sidebar */
+    --sidebar-ring: 222 75% 55%; /* Blue for sidebar ring */
   }
 
   .dark {
-    --background: 276 10% 10%; /* Dark Purple */
+    --background: 222 30% 10%; /* Dark Blue */
     --foreground: 0 0% 98%; /* White-ish */
 
-    --card: 276 10% 12%; /* Slightly lighter dark purple for cards */
+    --card: 222 30% 12%; /* Slightly lighter dark blue for cards */
     --card-foreground: 0 0% 98%;
 
-    --popover: 276 10% 8%; /* Even darker for popovers */
+    --popover: 222 30% 8%; /* Even darker for popovers */
     --popover-foreground: 0 0% 98%;
 
-    --primary: 276 87% 65%; /* Brighter Purple for dark mode */
-    --primary-foreground: 276 87% 15%; /* Dark Purple for text on primary */
+    --primary: 222 75% 60%; /* Brighter Blue for dark mode primary */
+    --primary-foreground: 222 75% 15%; /* Dark Blue for text on primary */
 
-    --secondary: 276 15% 20%; /* Darker, less saturated purple */
+    --secondary: 222 25% 20%; /* Darker, less saturated blue */
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 276 15% 20%;
-    --muted-foreground: 276 10% 65%;
+    --muted: 222 25% 20%;
+    --muted-foreground: 222 15% 65%;
 
-    --accent: 180 100% 35%; /* Brighter Teal for dark mode */
-    --accent-foreground: 0 0% 98%;
+    --accent: 180 100% 35%; /* Brighter Teal for dark mode (remains) */
+    --accent-foreground: 0 0% 98%; /* (remains) */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 276 15% 25%;
-    --input: 276 15% 25%;
-    --ring: 180 100% 40%; /* Teal ring for dark mode */
+    --border: 222 25% 25%;
+    --input: 222 25% 25%;
+    --ring: 222 75% 65%; /* Brighter blue ring for dark mode */
 
-    /* Chart colors for dark mode (can be adjusted as needed) */
-    --chart-1: 276 87% 70%; /* Brighter Purple variant */
-    --chart-2: 180 100% 40%; /* Brighter Teal variant */
-    --chart-3: 276 60% 55%; /* Mid-Dark Purple */
-    --chart-4: 180 70% 30%; /* Mid-Dark Teal */
-    --chart-5: 276 25% 40%; /* Darker Purple variant */
+    /* Chart colors for dark mode (Blue/Teal) */
+    --chart-1: 222 75% 65%; /* Brighter Blue variant */
+    --chart-2: 180 100% 40%; /* Brighter Teal variant (remains) */
+    --chart-3: 222 55% 50%; /* Mid-Dark Blue */
+    --chart-4: 180 70% 30%; /* Mid-Dark Teal (remains) */
+    --chart-5: 222 35% 35%; /* Darker Blue variant */
 
-    /* Sidebar colors for dark theme (already PRD-aligned) */
-    --sidebar-background: 276 10% 12%;
+    /* Sidebar colors for dark theme (Blue/Teal) */
+    --sidebar-background: 222 30% 12%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 276 87% 65%;
-    --sidebar-primary-foreground: 276 87% 15%;
-    --sidebar-accent: 180 100% 35%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 276 15% 22%;
-    --sidebar-ring: 180 100% 40%;
+    --sidebar-primary: 222 75% 60%;
+    --sidebar-primary-foreground: 222 75% 15%;
+    --sidebar-accent: 180 100% 35%; /* Teal (remains) */
+    --sidebar-accent-foreground: 0 0% 98%; /* (remains) */
+    --sidebar-border: 222 25% 22%;
+    --sidebar-ring: 222 75% 65%; /* Blue for sidebar ring */
   }
 }
 
@@ -114,8 +114,8 @@ body {
   body {
     @apply text-foreground; /* Apply text color from theme */
     background-color: hsl(var(--background)); /* Fallback solid background */
-    /* Subtle gradient from theme background (white) to very light purple */
-    background-image: linear-gradient(to bottom, hsl(var(--background)) 70%, hsl(276, 80%, 97%) 100%);
+    /* Subtle gradient from theme background (white) to very light blue */
+    background-image: linear-gradient(to bottom, hsl(var(--background)) 70%, hsl(222, 70%, 96%) 100%);
     /* min-h-screen is applied in RootLayout, ensures gradient covers viewport */
   }
 }
