@@ -50,7 +50,7 @@ async function getEventPhotosFromFirestore(eventId: string): Promise<Photo[]> {
 
 
 export default async function EventPage({ params }: { params: { eventId: string } }) {
-  const eventId = params.eventId || 'sample-event';
+  const eventId = (params && params.eventId) ? params.eventId : 'sample-event';
   
   const firestoreNotConfigured = !firestore;
 
@@ -87,12 +87,10 @@ export default async function EventPage({ params }: { params: { eventId: string 
               <p className="text-sm">La conexión con la base de datos (Firestore) no está configurada correctamente.</p>
                <p className="text-sm mt-1">
                 Por favor, revisa los **logs de la consola de tu servidor Next.js** (donde ejecutas `npm run dev` o similar en Firebase Studio) inmediatamente después de reiniciar el servidor.
-                Busca mensajes que comiencen con "--- Firebase Admin Initialization ---".
+                Busca mensajes que comiencen con "--- Firebase Admin Initialization ---". Estos logs indicarán si la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` (del archivo `.env.local` en la raíz de tu proyecto) se está cargando.
+                Asegúrate de haber reiniciado el servidor después de cualquier cambio en `.env.local`.
               </p>
-              <p className="text-sm mt-1">
-                Estos logs indicarán si la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` (del archivo `.env.local` en la raíz de tu proyecto) se está cargando.
-                Si no se carga, la galería de fotos podría estar vacía o incompleta. Asegúrate de haber reiniciado el servidor después de cualquier cambio en `.env.local`.
-              </p>
+              <p className="text-sm mt-1">Si los logs muestran "ERROR: FIREBASE_SERVICE_ACCOUNT_JSON environment variable is MISSING or EMPTY", el archivo `.env.local` no se está cargando correctamente.</p>
             </div>
           </div>
         </div>
