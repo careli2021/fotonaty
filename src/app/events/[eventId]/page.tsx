@@ -12,10 +12,8 @@ import { firestore } from '@/lib/firebaseAdmin'; // Import initialized Firestore
 const googleDriveBaseUrl = 'https://drive.google.com/uc?export=download&id=';
 
 async function getEventPhotosFromFirestore(eventId: string): Promise<Photo[]> {
-  // La verificación de la configuración de Firebase Admin SDK se hace en firebaseAdmin.ts
-  // Si firestore no está disponible, la función simplemente retornará un array vacío.
   if (!firestore) {
-    console.warn("Firestore instance is not available. Cannot fetch photos for eventId:", eventId);
+    console.warn("Firestore instance is not available in getEventPhotosFromFirestore. Cannot fetch photos for eventId:", eventId);
     return [];
   }
 
@@ -41,6 +39,7 @@ async function getEventPhotosFromFirestore(eventId: string): Promise<Photo[]> {
         favorites: Math.floor(Math.random() * 10), // Mock favorites for now
       };
     });
+    console.log(`Fetched ${photos.length} photos from Firestore for eventId: ${eventId}`);
     return photos;
   } catch (error) {
     console.error('Error fetching photos from Firestore:', error);
@@ -52,23 +51,25 @@ async function getEventPhotosFromFirestore(eventId: string): Promise<Photo[]> {
 export default async function EventPage({ params }: { params: { eventId: string } }) {
   const eventId = params.eventId || 'sample-event';
   
-  const eventDetailsFromFirestore = { // Simulación de carga de detalles del evento desde Firestore
-    name: `Evento ${eventId}`, 
-    // El banner podría venir de Firestore o ser una foto específica de la galería.
-    // Por ahora, usaremos una imagen por defecto o la primera foto de la galería.
-    colorScheme: { primary: '#A020F0', accent: '#008080' },
-  };
-  
-  const photos = await getEventPhotosFromFirestore(eventId);
-  
-  // La advertencia se mostrará si la instancia de Firestore no está disponible (manejado en firebaseAdmin.ts)
-  // o si la variable de entorno no está configurada.
+  // La advertencia se mostrará si la instancia de Firestore no está disponible.
   const firestoreNotProperlyConfigured = !firestore;
 
+  let photos: Photo[] = [];
+  let eventName = `Evento ${eventId}`; // Default event name
 
-  // Determinar banner: usar primera foto de Firestore si disponible, sino un placeholder.
+  if (!firestoreNotProperlyConfigured) {
+    photos = await getEventPhotosFromFirestore(eventId);
+    // Podrías obtener el nombre del evento desde Firestore también si lo guardas allí
+    // Por ahora, se mantiene el nombre basado en eventId o un mock.
+  } else {
+    console.warn(`Firestore not configured for event ${eventId}, photo gallery will be empty or show placeholders.`);
+  }
+  
+  const eventDetailsFromFirestore = { // Simulación, podría expandirse para cargar desde Firestore
+    name: eventName,
+  };
+  
   const bannerToDisplay = photos.length > 0 ? photos[0].url : `https://placehold.co/1200x300.png`;
-
 
   return (
     <div className="space-y-8">
@@ -84,7 +85,7 @@ export default async function EventPage({ params }: { params: { eventId: string 
             <div className="py-1"><AlertTriangle className="h-6 w-6 text-yellow-500 mr-3" /></div>
             <div>
               <p className="font-bold">Advertencia de Configuración</p>
-              <p className="text-sm">La integración con Firestore no está completamente configurada (falta `FIREBASE_SERVICE_ACCOUNT_JSON` o hay un error de inicialización). Mostrando datos de muestra o galería vacía.</p>
+              <p className="text-sm">La integración con Firestore no está completamente configurada (falta `FIREBASE_SERVICE_ACCOUNT_JSON` o hay un error de inicialización). La galería de fotos podría estar vacía o incompleta.</p>
             </div>
           </div>
         </div>
@@ -108,7 +109,7 @@ export default async function EventPage({ params }: { params: { eventId: string 
             <MessageSquare className="mr-3 h-7 w-7" />
             Muro del Evento y Chat
         </h2>
-        <EventChat /> {/* EventChat es client-side y permanece como is */}
+        <EventChat />
       </div>
       
       <Separator />
@@ -118,7 +119,10 @@ export default async function EventPage({ params }: { params: { eventId: string 
         {photos.length > 0 ? (
           <PhotoGrid photos={photos} />
         ) : (
-          !firestoreNotProperlyConfigured && <p className="text-center text-muted-foreground">No se encontraron fotos para este evento en Firestore, o Firestore no está configurado.</p>
+          !firestoreNotProperlyConfigured && <p className="text-center text-muted-foreground">No se encontraron fotos para este evento en Firestore.</p>
+        )}
+        {firestoreNotProperlyConfigured && photos.length === 0 && (
+          <p className="text-center text-muted-foreground">La galería está vacía porque Firestore no está configurado.</p>
         )}
       </div>
     </div>
