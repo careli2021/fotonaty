@@ -31,8 +31,8 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     login: "Login",
     
     // Old Home Page (now /features)
-    welcomeToEventSnap: "Welcome to EventSnap!", 
-    homePageSubtitle: "Capture, share, and relive your special event moments in real-time. Easy for guests, delightful for hosts.", 
+    welcomeToEventSnap: "Fotografia Personalizada Sesiones Marketing", 
+    homePageSubtitle: "Captura momentos únicos y crea recuerdos inolvidables en tus eventos sociales, sesiones personales y fotografía de productos con nuestra ayuda.",
     exploreSampleEvent: "Explore a Sample Event",
     guestLogin: "Guest Login",
     easyPhotoSharing: "Easy Photo Sharing",
@@ -101,8 +101,8 @@ const translationsStore: Record<SupportedLanguage, Translations> = {
     login: "Iniciar Sesión",
 
     // Old Home Page (now /features)
-    welcomeToEventSnap: "¡Bienvenido a EventSnap!",
-    homePageSubtitle: "Captura, comparte y revive los momentos especiales de tu evento en tiempo real. Fácil para los invitados, encantador para los anfitriones.",
+    welcomeToEventSnap: "Nathaly Studio ! Fotografia Personalizada",
+    homePageSubtitle: "Captura momentos únicos y crea recuerdos inolvidables en tus eventos sociales, sesiones personales y fotografía de productos con nuestra ayuda.",
     exploreSampleEvent: "Explorar Evento de Muestra",
     guestLogin: "Acceso de Invitados",
     easyPhotoSharing: "Compartir Fotos Fácilmente",
