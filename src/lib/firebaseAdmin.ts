@@ -8,8 +8,6 @@ console.log('--- Firebase Admin Initialization Start ---');
 if (serviceAccountJsonString && serviceAccountJsonString.length > 1) {
   console.log('SUCCESS: FIREBASE_SERVICE_ACCOUNT_JSON environment variable IS PRESENT.');
   console.log('Length of FIREBASE_SERVICE_ACCOUNT_JSON:', serviceAccountJsonString.length);
-  // Log a small, safe snippet to confirm it's not obviously wrong (e.g., just 'true' or a short malformed string)
-  // Avoid logging too much of the sensitive key.
   const snippet = serviceAccountJsonString.substring(0, Math.min(100, serviceAccountJsonString.length));
   console.log('Snippet (first 100 chars or less):', snippet + (serviceAccountJsonString.length > 100 ? '...' : ''));
 } else {
@@ -23,7 +21,17 @@ let firestore: admin.firestore.Firestore | undefined = undefined;
 if (serviceAccountJsonString) {
   if (admin.apps.length === 0) {
     try {
+      console.log('Attempting to parse FIREBASE_SERVICE_ACCOUNT_JSON...');
       const serviceAccount = JSON.parse(serviceAccountJsonString);
+      console.log('SUCCESS: Parsed FIREBASE_SERVICE_ACCOUNT_JSON.');
+      console.log('Parsed serviceAccount object (type):', typeof serviceAccount);
+      if (serviceAccount && typeof serviceAccount === 'object' && serviceAccount.project_id) {
+        console.log('Parsed serviceAccount.project_id:', serviceAccount.project_id);
+      } else {
+        console.warn('Parsed serviceAccount does not appear to be a valid object or lacks project_id.');
+      }
+
+      console.log('Attempting to initialize Firebase Admin SDK...');
       app = admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
       });
@@ -31,6 +39,12 @@ if (serviceAccountJsonString) {
     } catch (error: any) {
       console.error('ERROR: Failed to parse FIREBASE_SERVICE_ACCOUNT_JSON or initialize Firebase Admin SDK.');
       console.error('Parsing/Initialization Error details:', error.message);
+      if (error.stack) {
+        console.error('Error Stack:', error.stack);
+      }
+      if (error.message && error.message.includes("INTERNAL")) {
+        console.error("INTERNAL Firebase error detected. This might be due to the service account key format (especially newlines in private_key) or an SDK issue.");
+      }
       // Log the beginning of the string again if parsing failed, it might give a clue
       if (serviceAccountJsonString) {
         console.error('Attempted to parse (first 50 chars):', serviceAccountJsonString.substring(0, 50) + '...');

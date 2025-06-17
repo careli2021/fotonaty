@@ -64,10 +64,14 @@ export default async function EventPage({ params }: { params: { eventId: string 
     console.warn(`Firestore not configured for event ${eventId}, photo gallery will be empty or show placeholders.`);
   }
   
+  // In a real app, you'd fetch eventDetails from Firestore as well
   const eventDetailsFromFirestore = { 
-    name: eventName,
+    name: eventName, // Using a dynamic name for now
+    // bannerUrl: 'https://placehold.co/1200x300.png?text=Event+Banner', // Placeholder
+    // photoCount: photos.length,
   };
   
+  // Use the first photo as a banner, or a placeholder if no photos
   const bannerToDisplay = photos.length > 0 ? photos[0].url : `https://placehold.co/1200x300.png`;
 
   return (
@@ -87,10 +91,11 @@ export default async function EventPage({ params }: { params: { eventId: string 
               <p className="text-sm">La conexión con la base de datos (Firestore) no está configurada correctamente.</p>
                <p className="text-sm mt-1">
                 Por favor, revisa los **logs de la consola de tu servidor Next.js** (donde ejecutas `npm run dev` o similar en Firebase Studio) inmediatamente después de reiniciar el servidor.
-                Busca mensajes que comiencen con "--- Firebase Admin Initialization ---". Estos logs indicarán si la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` (del archivo `.env.local` en la raíz de tu proyecto) se está cargando.
+                Busca mensajes que comiencen con "--- Firebase Admin Initialization ---". Estos logs indicarán si la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` (del archivo `.env.local` en la raíz de tu proyecto) se está cargando y si hay errores de parseo o inicialización.
                 Asegúrate de haber reiniciado el servidor después de cualquier cambio en `.env.local`.
               </p>
               <p className="text-sm mt-1">Si los logs muestran "ERROR: FIREBASE_SERVICE_ACCOUNT_JSON environment variable is MISSING or EMPTY", el archivo `.env.local` no se está cargando correctamente.</p>
+              <p className="text-sm mt-1">Si los logs muestran "ERROR: Failed to parse FIREBASE_SERVICE_ACCOUNT_JSON or initialize Firebase Admin SDK", puede haber un problema con el contenido del JSON en tu `.env.local` (especialmente la `private_key`) o un problema interno del SDK de Firebase.</p>
             </div>
           </div>
         </div>
@@ -127,7 +132,7 @@ export default async function EventPage({ params }: { params: { eventId: string 
           !firestoreNotConfigured && <p className="text-center text-muted-foreground py-4">No se encontraron fotos para este evento en Firestore. Verifica que existan datos para el ID de evento: '{eventId}'.</p>
         )}
         {firestoreNotConfigured && photos.length === 0 && (
-          <p className="text-center text-muted-foreground py-4">La galería está vacía porque la conexión con la base de datos (Firestore) no pudo ser establecida. Revisa la configuración y los logs del servidor.</p>
+          <p className="text-center text-muted-foreground py-4">La galería está vacía porque la conexión con la base de datos (Firestore) no pudo ser establecida. Revisa la configuración y los logs del servidor detallados.</p>
         )}
       </div>
     </div>
