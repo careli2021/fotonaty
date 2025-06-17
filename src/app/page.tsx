@@ -18,9 +18,8 @@ export default function NewHomePage() {
         <Image
           src="https://drive.google.com/uc?export=download&id=1msToi39sUVjgCQJ3HKwxRxMSS3woUM4w"
           alt={t('heroAlt')}
-          layout="fill"
-          objectFit="cover"
-          className="absolute inset-0 z-0"
+          fill
+          className="absolute inset-0 z-0 object-cover"
           data-ai-hint="event photography professional"
           priority
         />
@@ -97,13 +96,13 @@ export default function NewHomePage() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="aspect-square relative rounded-lg overflow-hidden shadow-md group">
-                 <Image src="https://drive.google.com/uc?export=download&id=1wy37pD1-z7Z4NTISlbA13O46fSABKbj6" alt={t('galleryImageAlt1')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="event photography sample"/>
+                 <Image src="https://drive.google.com/uc?export=download&id=1wy37pD1-z7Z4NTISlbA13O46fSABKbj6" alt={t('galleryImageAlt1')} fill className="object-cover group-hover:scale-105 transition-transform duration-300" data-ai-hint="event photography sample"/>
               </div>
                <div className="aspect-square relative rounded-lg overflow-hidden shadow-md group">
-                 <Image src="https://drive.google.com/uc?export=download&id=15STDzZX0QoMCh3kMwVi48y3vL-ZRyq65" alt={t('galleryImageAlt2')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="party social gathering"/>
+                 <Image src="https://drive.google.com/uc?export=download&id=15STDzZX0QoMCh3kMwVi48y3vL-ZRyq65" alt={t('galleryImageAlt2')} fill className="object-cover group-hover:scale-105 transition-transform duration-300" data-ai-hint="party social gathering"/>
               </div>
                <div className="aspect-square relative rounded-lg overflow-hidden shadow-md group">
-                 <Image src="https://drive.google.com/uc?export=download&id=1idHpOxzrEEpn8mpLsvmsKlJ-T1AxpVwR" alt={t('galleryImageAlt3')} layout="fill" objectFit="cover" className="group-hover:scale-105 transition-transform duration-300" data-ai-hint="wedding celebration moments"/>
+                 <Image src="https://drive.google.com/uc?export=download&id=1idHpOxzrEEpn8mpLsvmsKlJ-T1AxpVwR" alt={t('galleryImageAlt3')} fill className="object-cover group-hover:scale-105 transition-transform duration-300" data-ai-hint="wedding celebration moments"/>
               </div>
             </div>
             <Button size="lg" asChild className="mt-12 bg-primary hover:bg-primary/80 text-primary-foreground">
