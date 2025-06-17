@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 // Make sure to place your service account JSON file in the specified path
 // For example, src/keys/firebase-service-account.json
 // And ensure the alias '@/' is correctly configured in your tsconfig.json to point to 'src/'
-import serviceAccount from '@/keys/firebase-service-account.json'; // This path is correct if the file exists at src/keys/
+import serviceAccountOriginal from '@/keys/firebase-service-account.json'; // This path is correct if the file exists at src/keys/
 
 let app: admin.app.App | undefined = undefined;
 let firestore: admin.firestore.Firestore | undefined = undefined;
@@ -12,8 +12,15 @@ let firestore: admin.firestore.Firestore | undefined = undefined;
 if (admin.apps.length === 0) {
   console.log('--- Firebase Admin Initialization Start (using direct JSON import) ---');
   try {
-    // The type assertion `as admin.ServiceAccount` is used because direct JSON imports
-    // might not have perfect type inference for the complex structure of the service account.
+    // Create a plain copy of the service account object
+    // This can help if the imported module has some special proxying by the build tool
+    const serviceAccount = { ...serviceAccountOriginal };
+
+    console.log('Attempting to initialize Firebase Admin SDK with direct JSON import.');
+    console.log('Service Account Project ID:', serviceAccount.project_id);
+    console.log('Service Account Client Email:', serviceAccount.client_email);
+    // Do not log the full private key for security reasons
+
     app = admin.initializeApp({
       credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
     });
