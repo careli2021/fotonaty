@@ -13,7 +13,8 @@ const googleDriveBaseUrl = 'https://drive.google.com/uc?export=download&id=';
 
 async function getEventPhotosFromFirestore(eventId: string): Promise<Photo[]> {
   if (!firestore) {
-    console.warn("Firestore instance is not available in getEventPhotosFromFirestore. Cannot fetch photos for eventId:", eventId);
+    // This log will appear in the server console if firestore is not initialized
+    console.warn(`Firestore instance is not available in getEventPhotosFromFirestore. Cannot fetch photos for eventId: ${eventId}`);
     return [];
   }
 
@@ -51,21 +52,19 @@ async function getEventPhotosFromFirestore(eventId: string): Promise<Photo[]> {
 export default async function EventPage({ params }: { params: { eventId: string } }) {
   const eventId = params.eventId || 'sample-event';
   
-  // La advertencia se mostrará si la instancia de Firestore no está disponible.
-  const firestoreNotProperlyConfigured = !firestore;
+  const firestoreNotConfigured = !firestore;
 
   let photos: Photo[] = [];
-  let eventName = `Evento ${eventId}`; // Default event name
+  let eventName = `Evento ${eventId}`; 
 
-  if (!firestoreNotProperlyConfigured) {
+  if (!firestoreNotConfigured) {
     photos = await getEventPhotosFromFirestore(eventId);
-    // Podrías obtener el nombre del evento desde Firestore también si lo guardas allí
-    // Por ahora, se mantiene el nombre basado en eventId o un mock.
   } else {
+    // This log will appear in the server console when the page is rendered
     console.warn(`Firestore not configured for event ${eventId}, photo gallery will be empty or show placeholders.`);
   }
   
-  const eventDetailsFromFirestore = { // Simulación, podría expandirse para cargar desde Firestore
+  const eventDetailsFromFirestore = { 
     name: eventName,
   };
   
@@ -79,15 +78,21 @@ export default async function EventPage({ params }: { params: { eventId: string 
         photoCount={photos.length} 
       />
       
-      {firestoreNotProperlyConfigured && (
+      {firestoreNotConfigured && (
         <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md my-4" role="alert">
           <div className="flex">
             <div className="py-1"><AlertTriangle className="h-6 w-6 text-yellow-500 mr-3" /></div>
             <div>
               <p className="font-bold">Advertencia de Configuración</p>
               <p className="text-sm">La conexión con la base de datos (Firestore) no está configurada correctamente.</p>
-              <p className="text-sm mt-1">Por favor, verifica que la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` esté correctamente definida en un archivo `.env.local` en la raíz de tu proyecto y que hayas reiniciado el servidor de desarrollo.</p>
-              <p className="text-sm mt-1">La galería de fotos podría estar vacía o incompleta.</p>
+               <p className="text-sm mt-1">
+                Por favor, revisa los **logs de la consola de tu servidor Next.js** (donde ejecutas `npm run dev` o similar en Firebase Studio) inmediatamente después de reiniciar el servidor.
+                Busca mensajes que comiencen con "--- Firebase Admin Initialization ---".
+              </p>
+              <p className="text-sm mt-1">
+                Estos logs indicarán si la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` (del archivo `.env.local` en la raíz de tu proyecto) se está cargando.
+                Si no se carga, la galería de fotos podría estar vacía o incompleta. Asegúrate de haber reiniciado el servidor después de cualquier cambio en `.env.local`.
+              </p>
             </div>
           </div>
         </div>
@@ -121,13 +126,12 @@ export default async function EventPage({ params }: { params: { eventId: string 
         {photos.length > 0 ? (
           <PhotoGrid photos={photos} />
         ) : (
-          !firestoreNotProperlyConfigured && <p className="text-center text-muted-foreground py-4">No se encontraron fotos para este evento en Firestore. Verifica que existan datos para el ID de evento: '{eventId}'.</p>
+          !firestoreNotConfigured && <p className="text-center text-muted-foreground py-4">No se encontraron fotos para este evento en Firestore. Verifica que existan datos para el ID de evento: '{eventId}'.</p>
         )}
-        {firestoreNotProperlyConfigured && photos.length === 0 && (
-          <p className="text-center text-muted-foreground py-4">La galería está vacía porque la conexión con la base de datos (Firestore) no pudo ser establecida. Revisa la configuración.</p>
+        {firestoreNotConfigured && photos.length === 0 && (
+          <p className="text-center text-muted-foreground py-4">La galería está vacía porque la conexión con la base de datos (Firestore) no pudo ser establecida. Revisa la configuración y los logs del servidor.</p>
         )}
       </div>
     </div>
   );
 }
-
