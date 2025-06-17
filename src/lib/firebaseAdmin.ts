@@ -22,16 +22,28 @@ if (serviceAccountJsonString) {
   if (admin.apps.length === 0) {
     try {
       console.log('Attempting to parse FIREBASE_SERVICE_ACCOUNT_JSON...');
-      const serviceAccount = JSON.parse(serviceAccountJsonString);
+      let serviceAccount = JSON.parse(serviceAccountJsonString);
       console.log('SUCCESS: Parsed FIREBASE_SERVICE_ACCOUNT_JSON.');
       console.log('Parsed serviceAccount object (type):', typeof serviceAccount);
+
       if (serviceAccount && typeof serviceAccount === 'object' && serviceAccount.project_id) {
         console.log('Parsed serviceAccount.project_id:', serviceAccount.project_id);
+        
+        // IMPORTANT: Fix for "Invalid PEM formatted message" by replacing escaped newlines
+        if (serviceAccount.private_key && typeof serviceAccount.private_key === 'string') {
+          console.log('Original private_key snippet (first 30 chars):', serviceAccount.private_key.substring(0,30) + '...');
+          serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+          console.log('SUCCESS: Replaced escaped newlines in private_key.');
+          console.log('Processed private_key snippet (first 30 chars):', serviceAccount.private_key.substring(0,30) + '...');
+        } else {
+          console.warn('WARNING: serviceAccount.private_key is missing or not a string.');
+        }
+
       } else {
-        console.warn('Parsed serviceAccount does not appear to be a valid object or lacks project_id.');
+        console.warn('WARNING: Parsed serviceAccount does not appear to be a valid object or lacks project_id.');
       }
 
-      console.log('Attempting to initialize Firebase Admin SDK...');
+      console.log('Attempting to initialize Firebase Admin SDK with processed service account...');
       app = admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
       });
@@ -42,8 +54,8 @@ if (serviceAccountJsonString) {
       if (error.stack) {
         console.error('Error Stack:', error.stack);
       }
-      if (error.message && error.message.includes("INTERNAL")) {
-        console.error("INTERNAL Firebase error detected. This might be due to the service account key format (especially newlines in private_key) or an SDK issue.");
+      if (error.message && (error.message.includes("INTERNAL") || error.message.includes("PEM"))) {
+        console.error("PEM or INTERNAL Firebase error detected. This might be due to the service account key format (especially newlines in private_key) or an SDK issue.");
       }
       // Log the beginning of the string again if parsing failed, it might give a clue
       if (serviceAccountJsonString) {
