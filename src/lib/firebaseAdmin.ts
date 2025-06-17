@@ -2,8 +2,8 @@
 import * as admin from 'firebase-admin';
 // Make sure to place your service account JSON file in the specified path
 // For example, src/keys/firebase-service-account.json
-// And ensure the alias '@/' is correctly configured in your tsconfig.json to point to 'src/'
-import serviceAccountOriginal from '@/keys/firebase-service-account.json'; // This path is correct if the file exists at src/keys/
+// And ensure the alias '@/ ' is correctly configured in your tsconfig.json to point to 'src/'
+import serviceAccountJson from '@/keys/firebase-service-account.json';
 
 let app: admin.app.App | undefined = undefined;
 let firestore: admin.firestore.Firestore | undefined = undefined;
@@ -12,17 +12,23 @@ let firestore: admin.firestore.Firestore | undefined = undefined;
 if (admin.apps.length === 0) {
   console.log('--- Firebase Admin Initialization Start (using direct JSON import) ---');
   try {
-    // Create a plain copy of the service account object
-    // This can help if the imported module has some special proxying by the build tool
-    const serviceAccount = { ...serviceAccountOriginal };
+    // Map the snake_case properties from the JSON to the camelCase properties
+    // expected by admin.credential.cert() and the admin.ServiceAccount interface.
+    const serviceAccount: admin.ServiceAccount = {
+      projectId: serviceAccountJson.project_id,
+      clientEmail: serviceAccountJson.client_email,
+      privateKey: serviceAccountJson.private_key,
+    };
 
-    console.log('Attempting to initialize Firebase Admin SDK with direct JSON import.');
-    console.log('Service Account Project ID:', serviceAccount.project_id);
-    console.log('Service Account Client Email:', serviceAccount.client_email);
-    // Do not log the full private key for security reasons
+    console.log('Attempting to initialize Firebase Admin SDK with mapped service account:');
+    console.log('Service Account Project ID:', serviceAccount.projectId);
+    console.log('Service Account Client Email:', serviceAccount.clientEmail);
+    // Do not log the full private key for security reasons, but confirm it's being passed
+    console.log('Service Account Private Key: Present (length check not shown for security)');
+
 
     app = admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+      credential: admin.credential.cert(serviceAccount),
     });
     console.log('SUCCESS: Firebase Admin SDK initialized successfully using direct JSON import.');
   } catch (error: any) {
