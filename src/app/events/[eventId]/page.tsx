@@ -6,48 +6,73 @@ import { Button } from '@/components/ui/button';
 import { Film, MessageSquare } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { SlideshowModal } from '@/components/event/slideshow-modal';
+import { getDriveFileIds } from '@/lib/google-drive';
 
-// IDs de Google Drive proporcionados por el usuario
-const bannerImageId = '1d0bMVmSk2pMe6S3ZgG0bKeSPS_Yfd9Ul'; // Primera imagen para el banner
+// Banner image can be a specific one or the first from the dynamic list later
+const defaultBannerImageId = '1d0bMVmSk2pMe6S3ZgG0bKeSPS_Yfd9Ul'; 
+const googleDriveBaseUrl = 'https://drive.google.com/uc?export=download&id=';
 
-// Fotos para la galería
-const photoIds = [
+const fallbackPhotoIds = [ // Used if Drive fetch fails or FOLDER_ID is not set
   '1d0bMVmSk2pMe6S3ZgG0bKeSPS_Yfd9Ul',
   '1xhMUu-m30TEAbs6SDcR42_JF5m0ryCII',
   '1BXulCho_fHLrx7p_Iuw29HGGM1pMEU2g',
   '185KgewWk0UIxONk33qAINJi7N_zpmxER',
-  // Puedes añadir más IDs aquí si tienes más fotos
 ];
 
-const googleDriveBaseUrl = 'https://drive.google.com/uc?export=download&id=';
+export default async function EventPage({ params }: { params: { eventId: string } }) {
+  const FOLDER_ID = process.env.GOOGLE_DRIVE_FOLDER_ID;
+  
+  let fetchedPhotoIds: string[] = [];
+  let eventName = `Evento ${params.eventId || 'de Muestra'}`;
+  let currentBannerId = defaultBannerImageId;
 
-const mockEvent = {
-  id: 'sample-event',
-  name: 'Fiesta de Ejemplo con Fotos de Drive',
-  bannerUrl: `${googleDriveBaseUrl}${bannerImageId}`,
-  colorScheme: { primary: '#A020F0', accent: '#008080' }, // Los colores del tema se manejan globalmente
-};
+  if (FOLDER_ID) {
+    try {
+      fetchedPhotoIds = await getDriveFileIds(FOLDER_ID);
+      if (fetchedPhotoIds.length > 0) {
+        currentBannerId = fetchedPhotoIds[0]; // Use the newest photo as banner
+        eventName = `Fotos Recientes: ${params.eventId || 'Evento Dinámico'}`;
+      } else {
+        eventName = `Carpeta Vacía: ${params.eventId || 'Evento Dinámico'}`;
+        fetchedPhotoIds = fallbackPhotoIds; // Show fallback if folder is empty
+        currentBannerId = fallbackPhotoIds[0] || defaultBannerImageId;
+      }
+    } catch (error) {
+      console.error("Failed to fetch photos from Drive, using fallback:", error);
+      fetchedPhotoIds = fallbackPhotoIds;
+      currentBannerId = fallbackPhotoIds[0] || defaultBannerImageId;
+      eventName = `Error al Cargar: ${params.eventId || 'Evento Dinámico'}`;
+    }
+  } else {
+    console.warn("GOOGLE_DRIVE_FOLDER_ID is not set. Displaying fallback photos.");
+    fetchedPhotoIds = fallbackPhotoIds;
+    currentBannerId = fallbackPhotoIds[0] || defaultBannerImageId;
+    eventName = `Evento de Muestra (Fallback): ${params.eventId}`;
+  }
 
-const mockPhotos = photoIds.map((id, index) => ({
-  id: `photo${index + 1}`,
-  url: `${googleDriveBaseUrl}${id}`,
-  photographer: `Invitado ${String.fromCharCode(65 + (index % 5))}`,
-  timestamp: new Date(Date.now() - Math.random() * 1000000000).toISOString(),
-  favorites: Math.floor(Math.random() * 50),
-}));
+  const mockEvent = {
+    id: params.eventId || 'sample-event',
+    name: eventName,
+    bannerUrl: `${googleDriveBaseUrl}${currentBannerId}`,
+    colorScheme: { primary: '#A020F0', accent: '#008080' }, // Theme colors are global
+  };
+
+  const photos = fetchedPhotoIds.map((id, index) => ({
+    id: `photo-${id}-${index}`, // Ensure unique key for React
+    url: `${googleDriveBaseUrl}${id}`,
+    photographer: `Foto de Drive ${index + 1}`, 
+    timestamp: new Date(Date.now() - Math.random() * 1000000000).toISOString(), // Mock timestamp
+    favorites: Math.floor(Math.random() * 10), // Mock favorites
+  }));
 
 
-export default function EventPage({ params }: { params: { eventId: string } }) {
-  const event = mockEvent; 
-  const photos = mockPhotos;
-
-  if (!event) {
+  if (!mockEvent) { // This check might be less relevant now
     return <div>Evento no encontrado.</div>;
   }
 
   return (
     <div className="space-y-8">
-      <EventDetailsHeader name={event.name} bannerUrl={event.bannerUrl} photoCount={photos.length} />
+      <EventDetailsHeader name={mockEvent.name} bannerUrl={mockEvent.bannerUrl} photoCount={photos.length} />
       
       <div className="flex justify-center gap-4">
         <SlideshowModal photos={photos} trigger={
