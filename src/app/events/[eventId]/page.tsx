@@ -80,12 +80,14 @@ export default async function EventPage({ params }: { params: { eventId: string 
       />
       
       {firestoreNotProperlyConfigured && (
-        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md" role="alert">
+        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md my-4" role="alert">
           <div className="flex">
             <div className="py-1"><AlertTriangle className="h-6 w-6 text-yellow-500 mr-3" /></div>
             <div>
               <p className="font-bold">Advertencia de Configuración</p>
-              <p className="text-sm">La integración con Firestore no está completamente configurada (falta `FIREBASE_SERVICE_ACCOUNT_JSON` o hay un error de inicialización). La galería de fotos podría estar vacía o incompleta.</p>
+              <p className="text-sm">La conexión con la base de datos (Firestore) no está configurada correctamente.</p>
+              <p className="text-sm mt-1">Por favor, verifica que la variable de entorno `FIREBASE_SERVICE_ACCOUNT_JSON` esté correctamente definida en un archivo `.env.local` en la raíz de tu proyecto y que hayas reiniciado el servidor de desarrollo.</p>
+              <p className="text-sm mt-1">La galería de fotos podría estar vacía o incompleta.</p>
             </div>
           </div>
         </div>
@@ -119,12 +121,13 @@ export default async function EventPage({ params }: { params: { eventId: string 
         {photos.length > 0 ? (
           <PhotoGrid photos={photos} />
         ) : (
-          !firestoreNotProperlyConfigured && <p className="text-center text-muted-foreground">No se encontraron fotos para este evento en Firestore.</p>
+          !firestoreNotProperlyConfigured && <p className="text-center text-muted-foreground py-4">No se encontraron fotos para este evento en Firestore. Verifica que existan datos para el ID de evento: '{eventId}'.</p>
         )}
         {firestoreNotProperlyConfigured && photos.length === 0 && (
-          <p className="text-center text-muted-foreground">La galería está vacía porque Firestore no está configurado.</p>
+          <p className="text-center text-muted-foreground py-4">La galería está vacía porque la conexión con la base de datos (Firestore) no pudo ser establecida. Revisa la configuración.</p>
         )}
       </div>
     </div>
   );
 }
+
