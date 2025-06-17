@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -28,6 +29,11 @@ export function EventChat() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [newMessage, setNewMessage] = useState("");
   const { toast } = useToast();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +78,9 @@ export function EventChat() {
               <div className="flex-1 bg-muted/50 p-3 rounded-lg shadow-sm">
                 <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold text-primary">{msg.user}</p>
-                    <p className="text-xs text-muted-foreground">{format(msg.timestamp, "p")}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {isClient ? format(msg.timestamp, "p") : ""}
+                    </p>
                 </div>
                 <p className="text-sm text-foreground mt-1">{msg.text}</p>
               </div>
